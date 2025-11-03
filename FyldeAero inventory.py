@@ -2,6 +2,10 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 import csv
+import os
+
+#Changes directory to project directory
+os.chdir('C:\\Users\\ethan\\Documents\\College\\Module 2\\program')
 
 #made global, as almost all subroutines use
 global isLocked
@@ -36,7 +40,6 @@ def open_searchpage():
 
 def open_menupage():
     if not isLocked:
-        print("open_menupage() called correctly")
         loadStock()
         menupage.tkraise()
     else:
@@ -47,7 +50,7 @@ def exportStock():
     if not isLocked:
         exportmessage = ""
         #opens the file to read
-        with open('C:\\Users\\ethan\\Documents\\College\\Module 2\\program\\stock.csv', newline='') as readfile:
+        with open('stock.csv', newline='') as readfile:
             #seperates records
             stockinfo = csv.reader(readfile, delimiter=',', quotechar='|')
             for row in stockinfo:
@@ -60,7 +63,6 @@ def exportStock():
 
 def checkUsername(givenUsername):
     global isLocked
-    print("isLocked is " + str(isLocked))
 
     #Ensuring entered a username
     if (givenUsername == ""):
@@ -71,7 +73,7 @@ def checkUsername(givenUsername):
     usernameFound = False
 
     #opens csv file
-    with open('C:\\Users\\ethan\\Documents\\College\\Module 2\\program\\usernames.csv', newline='') as csvfile:
+    with open('usernames.csv', newline='') as csvfile:
         #seperates records
         usernames = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in usernames:
@@ -84,11 +86,9 @@ def checkUsername(givenUsername):
     if usernameFound == True:
         #if username is found, open the menu.
         isLocked = False
-        print("isLocked is " + str(isLocked))
         open_menupage()
     else:
         #else make a messagebox with the text in it.
-        print("isLocked is still " + str(isLocked))
         messagebox.showinfo(title="No username found", message="No username found, please try again.")
 
 def addItem(itemName, itemSKU, itemCount):
@@ -105,7 +105,7 @@ def addItem(itemName, itemSKU, itemCount):
         return
 
     #open csv file to write
-    with open('C:\\Users\\ethan\\Documents\\College\\Module 2\\program\\stock.csv', 'a', newline='') as csvfile:
+    with open('stock.csv', 'a', newline='') as csvfile:
         writer = csv.writer(csvfile)
         #write information to csv file
         writer.writerow([itemName, itemSKU, itemCount])
@@ -122,7 +122,7 @@ def removeItem(itemSKU):
     itemFound = False
 
     #opens the file to read
-    with open('C:\\Users\\ethan\\Documents\\College\\Module 2\\program\\stock.csv', newline='') as readfile:
+    with open('stock.csv', newline='') as readfile:
         #seperates records
         stockinfo = csv.reader(readfile, delimiter=',', quotechar='|')
         for row in stockinfo:
@@ -138,7 +138,7 @@ def removeItem(itemSKU):
         messagebox.showinfo(title="Item not Removed", message="No item removed, SKU not found.")
     else:
         #opens the file to write
-        with open('C:\\Users\\ethan\\Documents\\College\\Module 2\\program\\stock.csv', 'w', newline='') as writefile:
+        with open('stock.csv', 'w', newline='') as writefile:
             writer = csv.writer(writefile)
             #write remaining lines.
             writer.writerows(keeplines)
@@ -160,7 +160,7 @@ def editItem(itemSKU, newStock):
     editline = ""
 
     #opens the file to read
-    with open('C:\\Users\\ethan\\Documents\\College\\Module 2\\program\\stock.csv', newline='') as readfile:
+    with open('stock.csv', newline='') as readfile:
         #seperates records
         stockinfo = csv.reader(readfile, delimiter=',', quotechar='|')
         for row in stockinfo:
@@ -178,7 +178,7 @@ def editItem(itemSKU, newStock):
         messagebox.showinfo(title="Item not edited", message="No item edited, SKU not found.")
     else:
         #opens the file to write
-        with open('C:\\Users\\ethan\\Documents\\College\\Module 2\\program\\stock.csv', 'w', newline='') as writefile:
+        with open('stock.csv', 'w', newline='') as writefile:
             writer = csv.writer(writefile)
             #write remaining lines.
             writer.writerows(keeplines)
@@ -193,7 +193,7 @@ def searchItem(value):
     keeplines = []    
     
     #opens the file to read
-    with open('C:\\Users\\ethan\\Documents\\College\\Module 2\\program\\stock.csv', newline='') as readfile:
+    with open('stock.csv', newline='') as readfile:
         #seperates records
         stockinfo = csv.reader(readfile, delimiter=',', quotechar='|')
         for row in stockinfo:
@@ -240,7 +240,7 @@ def loadStock():
     loadcount = 0
 
     #opens csv file
-    with open('C:\\Users\\ethan\\Documents\\College\\Module 2\\program\\stock.csv', newline='') as csvfile:
+    with open('stock.csv', newline='') as csvfile:
         #seperates records
         stockinfo = csv.reader(csvfile, delimiter=',', quotechar='|')
         for row in stockinfo:
