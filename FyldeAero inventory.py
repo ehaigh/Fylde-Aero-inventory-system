@@ -4,9 +4,6 @@ from tkinter import messagebox
 import csv
 import os
 
-#Changes directory to project directory
-os.chdir('C:\\Users\\ethan\\Documents\\College\\Module 2\\program')
-
 #made global, as almost all subroutines use
 global isLocked
 #boolean which determines if the user has passed the login screen.
