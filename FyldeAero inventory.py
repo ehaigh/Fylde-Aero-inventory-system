@@ -171,7 +171,7 @@ def editItem(itemSKU, newStock):
                 keeplines.append(editline)
 
 
-    if len(keeplines) == 0:
+    if len(editline) == 0:
         messagebox.showinfo(title="Item not edited", message="No item edited, SKU not found.")
     else:
         #opens the file to write
@@ -434,3 +434,4 @@ root.geometry("500x300") #window size
 root.title("Inventory Management System")
 
 root.mainloop()
+
